@@ -73,6 +73,11 @@ Examples:
 Shows a list of all persons in the address book. +
 Format: `list` or `l`
 
+=== Sorting the person list : `sort` or `so`
+
+Shows a list of all persons in the address book sorted in alphabhetical order of names. +
+Format: `sort` or `so`
+
 === Printing the addressbook `print` or `p`
 
 COMING V2.0: Exports the entire addressbook to a textfile for easy printing. +

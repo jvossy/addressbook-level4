@@ -966,3 +966,36 @@ Command entered: ‘favlist’
 In a similar way, the ‘fav [index]’ and ‘unfav [index]’ commands also call various classes and methods in order to add/ remove a person from the favourite List respectively.
 
 This feature will make it more convenient for Users to organize their contacts so that they can access their favourite contacts by simply using the flist command instead of searching by name or tags.
+
+== Enhancement Description
+Author: Siri
+
+Added a Sort command feature.
+
+The feature is implemented in a similar way to the list
+feature: the sort command sorts the list in alphabhetical
+order of names and displays the sorted list to the user.
+However the sort command does not update the actual Person list
+in the AddressBook which means that every time the user
+reopens AddressBook, he/she is presented with an unsorted
+list. The reason behind this is for the user to be able
+to view the list in two ways:
+
+1. In the order of who he added most recently (if sort
+function is not used)
+
+2. In alphabhetical order of names (if sort function is used)
+
+== Enhancement Description
+Author: Peng Xu
+
+Added color tags
+
+The feature is that assign different colors to each tag of person card. Every time when program starts, it will assign color to each tag randomly.
+
+== Enhancement Description
+Author: Peng Xu
+
+Added theme change menu item
+
+The feature is that user can change background color via the theme buttons on the menubar.
