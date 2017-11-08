@@ -4,18 +4,21 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :stylesDir: ../stylesheets
 
 == Project: AddressBook - Level 4
-AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 6 kLoC.
+AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX enabling some other modes of interaction.
+It is written in Java, and has about 8 kLoC.
 
-*Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] {give links to collated code files}
+*Code contributed*: [https://github.com/CS2103AUG2017-T13-B2/main/blob/fixing1.5/collated/Jacob.md[Functional code]]
+[https://github.com[Test code not yet complete]] {give links to collated code files}
 
-=== Enhancement Added: Undo/Redo
+=== Enhancement Added: Delete Button
 
 ==== External behavior
 
 ---
 #Start of Extract [from: User Guide]#
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=deleteButton]
 
 #End of Extract#
 
@@ -23,27 +26,110 @@ include::../UserGuide.adoc[tag=undoredo]
 
 ==== Justification
 
-{Justify the need for, and the current design (i.e. external behavior) of, the feature}
+Visual displays inherently encourage us to interact with them. As such, I simplified the deleting process by adding a
+delete button, allowing users to quickly remove people from their list.
 
 ==== Implementation
 
 ---
 #Start of Extract [from: Developer Guide]#
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=deleteButton]
 
 #End of Extract#
 
 ---
 
-=== Enhancement Proposed: Add command `remark`
+=== Enhancement Added: Edit Button
 
-{Explain similar to the Undo/Redo feature above.}
+==== External behavior
 
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=editButton]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+Edit commands are a huge pain to type out, since they force you to remember the prefix needed for each
+data type involved. This process is made much easier with the new edit button and it's edit window.
+
+==== Implementation
+
+---TODO
+#Start of Extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=editButton]
+
+#End of Extract#
+
+---
+=== Enhancement Added: Add Button
+
+==== External behavior
+
+---TODO
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=addButton]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+TODO
+Edit commands are a huge pain to type out, since they force you to remember the prefix needed for each
+data type involved. This process is made much easier with the new edit button and it's edit window.
+
+==== Implementation
+
+---TODO
+#Start of Extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=editButton]
+
+#End of Extract#
+
+---
+=== Enhancement Added: Undo and Redo Buttons
+
+==== External behavior
+
+---TODO
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=editButton]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+TODO
+Edit commands are a huge pain to type out, since they force you to remember the prefix needed for each
+data type involved. This process is made much easier with the new edit button and it's edit window.
+
+==== Implementation
+
+---TODO
+#Start of Extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=editButton]
+
+#End of Extract#
+
+---
 === Other contributions
 
-* Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-* Wrote additional tests to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+* Spent literally hours fighting with github
+* Is going to write some tests
 
 == Project: PowerPointLabs
 

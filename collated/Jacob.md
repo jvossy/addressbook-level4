@@ -1,6 +1,28 @@
 # Jacob
+###### \out\production\resources\view\AddWindow.fxml
+``` fxml
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="helpWindowRoot" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <TextField fx:id="nameField" prefWidth="200.0" promptText="Name"/>
+    <TextField fx:id="tagsField" prefWidth="200.0" promptText="Optional Tags"/>
+    <TextField fx:id="phoneField" prefWidth="200.0" promptText="Phone"/>
+    <TextField fx:id="birthdayField" prefWidth="200.0" promptText="Optional Birthday"/>
+    <TextField fx:id="addressField" prefWidth="200.0" promptText="Address"/>
+    <TextField fx:id="emailField" prefWidth="200.0" promptText="Email"/>
+    <TextField fx:id="scoreField" prefWidth="200.0" promptText="Optional Group Score"/>
+    <Button onAction='#handleAddSubmitAction' id="add" prefWidth="120.0" minWidth="90.0" text="Add"/>
+  </VBox>
+</StackPane>
+```
 ###### \out\production\resources\view\CommandBox.fxml
 ``` fxml
+  <Button onAction='#handleAddButtonAction' id="add" prefWidth="120.0" minWidth="90.0" text="Add"/>
   <Button onAction='#handleUndoButtonAction' id="undo" prefWidth="120.0" minWidth="90.0" text="Undo"/>
   <Button onAction='#handleRedoButtonAction' id="redo" prefWidth="120.0" minWidth="90.0" text="Redo"/>
 ```
@@ -15,8 +37,9 @@
 <StackPane fx:id="helpWindowRoot" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <TextField fx:id="nameField" prefWidth="200.0" promptText="Name"/>
-    <TextField fx:id="tagsField" prefWidth="200.0" promptText="Tags"/>
+    <TextField fx:id="tagsField" prefWidth="200.0" promptText="Tag(s)"/>
     <TextField fx:id="phoneField" prefWidth="200.0" promptText="Phone"/>
+    <TextField fx:id="birthdayField" prefWidth="200.0" promptText="Birthday"/>
     <TextField fx:id="addressField" prefWidth="200.0" promptText="Address"/>
     <TextField fx:id="emailField" prefWidth="200.0" promptText="Email"/>
     <TextField fx:id="scoreField" prefWidth="200.0" promptText="Group Score"/>
@@ -59,19 +82,160 @@
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+      <!-- @author Sirisha -->
+      <Label fx:id="birthday" styleClass="cell_small_label" text="\$birthday" />
+      <!-- @author Sirisha -->
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="score" styleClass="cell_small_label"  text="\$score" />
-      <Button onAction='#handleEditButtonAction' fx:id="edit" text="Edit"/>
-      <HBox spacing="10" alignment="bottom_right"
-            GridPane.columnIndex="1" GridPane.rowIndex="4">
-      </HBox>
-    </VBox>
-  </GridPane>
-</HBox>
+```
+###### \src\main\java\seedu\address\ui\AddWindow.java
+``` java
+package seedu.address.ui;
+
+import java.util.logging.Logger;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.address.commons.util.FxViewUtil;
+import seedu.address.logic.Logic;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+/**
+ * Controller for a help page
+ */
+public class AddWindow extends UiPart<Region> {
+
+    private static final Logger logger = LogsCenter.getLogger(AddWindow.class);
+    private static final String ICON = "/images/add_icon.png";
+    private static final String FXML = "AddWindow.fxml";
+    private static final String TITLE = "Add";
+
+    private final Logic logic;
+
+    @FXML
+    private TextField nameField;
+    @FXML
+    private TextField tagsField;
+    @FXML
+    private TextField phoneField;
+    @FXML
+    private TextField birthdayField;
+    @FXML
+    private TextField addressField;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private TextField scoreField;
+    @FXML
+    private Button add;
+
+    private final Stage dialogStage;
+
+    public AddWindow(Logic inlogic) {
+        super(FXML);
+        logic = inlogic;
+        Scene scene = new Scene(getRoot());
+        //Null passed as the parent stage to make it non-modal.
+        dialogStage = createDialogStage(TITLE, null, scene);
+        dialogStage.setMaxHeight(500);
+        dialogStage.setMaxWidth(800);
+        FxViewUtil.setStageIcon(dialogStage, ICON);
+    }
+
+    /**
+     * Shows the edit window.
+     * @throws IllegalStateException
+     */
+    public void show() {
+        logger.fine("Showing edit window to modify person.");
+        dialogStage.showAndWait();
+    }
+
+    /**
+     * handles button event given to it by the fxml doc that it is set as controller for by the constructor in UiPart
+     * @param buttonEvent
+     */
+    @FXML
+    private void handleAddSubmitAction(ActionEvent buttonEvent) {
+        try {
+            //first the command
+            String commandText = "add ";
+            //then its arguments
+            if (nameField.getText().length() != 0) {
+                commandText = commandText + " n/" + nameField.getText();
+            }
+            if (phoneField.getText().length() != 0) {
+                commandText = commandText + " p/" + phoneField.getText();
+            }
+            if (emailField.getText().length() != 0) {
+                commandText = commandText + " e/" + emailField.getText();
+            }
+            if (birthdayField.getText().length() != 0) {
+                commandText = commandText + " b/" + birthdayField.getText();
+            }
+            if (addressField.getText().length() != 0) {
+                commandText = commandText + " a/" + addressField.getText();
+            }
+            String tagsText = tagsField.getText();
+            if (tagsText.length() != 0) {
+                String tags = tagsText;
+                int lastIndex = 0;
+                for (int tagsIndex = 0; tagsIndex < tags.length(); tagsIndex++) {
+                    String s = "";
+                    if ((s + tags.charAt(tagsIndex)).equals(" ")) {
+                        commandText = commandText + " t/" + tagsText.substring(lastIndex, tagsIndex);
+                        lastIndex = tagsIndex;
+                    }
+                }
+                commandText = commandText + " t/" + tagsText.substring(lastIndex, tagsText.length());
+            }
+            if (scoreField.getText().length() != 0) {
+                commandText = commandText + " s/" + scoreField.getText();
+            }
+            CommandResult commandResult = logic.execute(commandText);
+            //Stage stage = (Stage) edit.getScene().getWindow();
+            //stage.close(); //TODO: Get the window to close on editing.
+            logger.info("Result: " + commandResult.feedbackToUser);
+            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            final Node source = (Node) buttonEvent.getSource();
+            final Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
+        } catch (CommandException | ParseException e) {
+            // handle command failure
+            logger.info("Add call failed");
+            raise(new NewResultAvailableEvent(e.getMessage()));
+        }
+    }
+}
 ```
 ###### \src\main\java\seedu\address\ui\CommandBox.java
 ``` java
+    /**
+     * handles button events given to it by the fxml doc that it is set as controller for by the constructor in UiPart
+     * @param buttonEvent
+     */
+    @FXML
+    private void handleAddButtonAction(ActionEvent buttonEvent) {
+```
+###### \src\main\java\seedu\address\ui\CommandBox.java
+``` java
+            AddWindow addWindow = new AddWindow(logic);
+            addWindow.show();
+        }
+        logger.info("Result: " + commandResult.feedbackToUser);
+        raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+    }
     /**
      * handles button events given to it by the fxml doc that it is set as controller for by the constructor in UiPart
      * @param buttonEvent
@@ -116,6 +280,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -148,6 +313,8 @@ public class EditWindow extends UiPart<Region> {
     private TextField tagsField;
     @FXML
     private TextField phoneField;
+    @FXML
+    private TextField birthdayField;
     @FXML
     private TextField addressField;
     @FXML
@@ -197,11 +364,24 @@ public class EditWindow extends UiPart<Region> {
             if (emailField.getText().length() != 0) {
                 commandText = commandText + " e/" + emailField.getText();
             }
+            if (birthdayField.getText().length() != 0) {
+                commandText = commandText + " b/" + birthdayField.getText();
+            }
             if (addressField.getText().length() != 0) {
                 commandText = commandText + " a/" + addressField.getText();
             }
-            if (tagsField.getText().length() != 0) {
-                commandText = commandText + " t/" + tagsField.getText();
+            String tagsText = tagsField.getText();
+            if (tagsText.length() != 0) {
+                String tags = tagsText;
+                int lastIndex = 0;
+                for (int tagsIndex = 0; tagsIndex < tags.length(); tagsIndex++) {
+                    String s = "";
+                    if ((s + tags.charAt(tagsIndex)).equals(" ")) {
+                        commandText = commandText + " t/" + tagsText.substring(lastIndex, tagsIndex);
+                        lastIndex = tagsIndex;
+                    }
+                }
+                commandText = commandText + " t/" + tagsText.substring(lastIndex, tagsText.length());
             }
             if (scoreField.getText().length() != 0) {
                 commandText = commandText + " s/" + scoreField.getText();
@@ -211,6 +391,9 @@ public class EditWindow extends UiPart<Region> {
             //stage.close(); //TODO: Get the window to close on editing.
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            final Node source = (Node) buttonEvent.getSource();
+            final Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
         } catch (CommandException | ParseException e) {
             // handle command failure
             logger.info("Edit call failed");
@@ -253,50 +436,6 @@ public class EditWindow extends UiPart<Region> {
     private void bindListeners(ReadOnlyPerson person) {
         name.textProperty().bind(Bindings.convert(person.nameProperty()));
         phone.textProperty().bind(Bindings.convert(person.phoneProperty()));
-        address.textProperty().bind(Bindings.convert(person.addressProperty()));
-        email.textProperty().bind(Bindings.convert(person.emailProperty()));
-        score.textProperty().bind(Bindings.convert(person.scoreProperty()));
-        person.tagProperty().addListener((observable, oldValue, newValue) -> {
-            tags.getChildren().clear();
-            initTags(person);
-        });
-    }
-
-    /**
-     * Initializes color tags
-     * initializes tags for the person
-     * @param person
-     */
-    private void initTags(ReadOnlyPerson person) {
-        person.getTags().forEach(tag -> {
-            Label tagLabel = new Label(tag.tagName);
-            tagLabel.setStyle("-fx-background-color: " + mapTagToColor(tag.tagName));
-            tags.getChildren().add(tagLabel);
-        });
-        //person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-    }
-
-    /**
-     * checks equality to the person
-     * @param other
-     * @return if the person equals the param
-     */
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-        // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
-            return false;
-        }
-
-        // state check
-        PersonCard card = (PersonCard) other;
-        return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
-    }
 ```
 ###### \src\main\java\seedu\address\ui\PersonCard.java
 ``` java
@@ -338,8 +477,30 @@ public class EditWindow extends UiPart<Region> {
         logger.info("Result: " + commandResult.feedbackToUser);
         raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 ```
+###### \src\main\resources\view\AddWindow.fxml
+``` fxml
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="helpWindowRoot" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <TextField fx:id="nameField" prefWidth="200.0" promptText="Name"/>
+    <TextField fx:id="tagsField" prefWidth="200.0" promptText="Optional Tags"/>
+    <TextField fx:id="phoneField" prefWidth="200.0" promptText="Phone"/>
+    <TextField fx:id="birthdayField" prefWidth="200.0" promptText="Optional Birthday"/>
+    <TextField fx:id="addressField" prefWidth="200.0" promptText="Address"/>
+    <TextField fx:id="emailField" prefWidth="200.0" promptText="Email"/>
+    <TextField fx:id="scoreField" prefWidth="200.0" promptText="Optional Group Score"/>
+    <Button onAction='#handleAddSubmitAction' id="add" prefWidth="120.0" minWidth="90.0" text="Add"/>
+  </VBox>
+</StackPane>
+```
 ###### \src\main\resources\view\CommandBox.fxml
 ``` fxml
+  <Button onAction='#handleAddButtonAction' id="add" prefWidth="120.0" minWidth="90.0" text="Add"/>
   <Button onAction='#handleUndoButtonAction' id="undo" prefWidth="120.0" minWidth="90.0" text="Undo"/>
   <Button onAction='#handleRedoButtonAction' id="redo" prefWidth="120.0" minWidth="90.0" text="Redo"/>
 ```
@@ -354,8 +515,9 @@ public class EditWindow extends UiPart<Region> {
 <StackPane fx:id="helpWindowRoot" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <TextField fx:id="nameField" prefWidth="200.0" promptText="Name"/>
-    <TextField fx:id="tagsField" prefWidth="200.0" promptText="Tags"/>
+    <TextField fx:id="tagsField" prefWidth="200.0" promptText="Tag(s)"/>
     <TextField fx:id="phoneField" prefWidth="200.0" promptText="Phone"/>
+    <TextField fx:id="birthdayField" prefWidth="200.0" promptText="Birthday"/>
     <TextField fx:id="addressField" prefWidth="200.0" promptText="Address"/>
     <TextField fx:id="emailField" prefWidth="200.0" promptText="Email"/>
     <TextField fx:id="scoreField" prefWidth="200.0" promptText="Group Score"/>
@@ -398,6 +560,9 @@ public class EditWindow extends UiPart<Region> {
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+      <!-- @author Sirisha -->
+      <Label fx:id="birthday" styleClass="cell_small_label" text="\$birthday" />
+      <!-- @author Sirisha -->
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
 ```

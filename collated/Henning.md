@@ -1,9 +1,13 @@
 # Henning
+###### \out\production\resources\view\PersonListCard.fxml
+``` fxml
+      <Label fx:id="score" styleClass="cell_small_label"  text="\$score" />
+```
 ###### \src\main\java\seedu\address\logic\parser\ParserUtil.java
 ``` java
     public static Optional<Score> parseScore(Optional<String> score) throws IllegalValueException {
         requireNonNull(score);
-        return score.isPresent() ? Optional.of(new Score(score.get())) : Optional.empty();
+        return score.isPresent() ? Optional.of(new Score(score.get())) : Optional.of(new Score(""));
     }
 ```
 ###### \src\main\java\seedu\address\model\person\Person.java
@@ -30,6 +34,8 @@
 ```
 ###### \src\main\java\seedu\address\model\person\Score.java
 ``` java
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
@@ -45,15 +51,15 @@ public class Score {
     public final String value;
 
     public Score(String score) throws IllegalValueException {
-        if (score.matches("\0")) {
-            this.value = "";
+        requireNonNull(score);
+        if (score.equals("")) {
+            this.value = score;
         } else {
             String filteredScore = score.replaceAll("[^\\d]", "");
-            String trimmedScore = filteredScore.trim();
-            if (!isValidScore(trimmedScore)) {
+            if (!isValidScore(filteredScore)) {
                 throw new IllegalValueException(MESSAGE_SCORE_CONSTRAINTS);
             }
-            this.value = "Group score: " + trimmedScore;
+            this.value = "Group score: " + filteredScore;
         }
     }
 
