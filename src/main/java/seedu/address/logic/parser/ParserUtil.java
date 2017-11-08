@@ -101,7 +101,7 @@ public class ParserUtil {
     //@@author Henning
     public static Optional<Score> parseScore(Optional<String> score) throws IllegalValueException {
         requireNonNull(score);
-        return score.isPresent() ? Optional.of(new Score(score.get())) : Optional.empty();
+        return score.isPresent() ? Optional.of(new Score(score.get())) : Optional.of(new Score(""));
     }
     //@@author
     /**

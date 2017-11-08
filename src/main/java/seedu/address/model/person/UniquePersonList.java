@@ -98,10 +98,10 @@ public class UniquePersonList implements Iterable<Person> {
 
             public int compare(ReadOnlyPerson person1, ReadOnlyPerson person2) {
 
-                String personName1 = person1.getName().toString();
-                String personName2 = person2.getName().toString();
+                String personName1 = person1.getScore().toString();
+                String personName2 = person2.getScore().toString();
 
-                return personName1.compareTo(personName2);
+                return personName2.compareTo(personName1);
             }
 
         };
