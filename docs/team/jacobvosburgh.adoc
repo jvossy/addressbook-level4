@@ -92,7 +92,7 @@ data type involved. This process is made much easier with the new edit button an
 ---TODO
 #Start of Extract [from: Developer Guide]#
 
-include::../DeveloperGuide.adoc[tag=editButton]
+include::../DeveloperGuide.adoc[tag=addButton]
 
 #End of Extract#
 
@@ -104,7 +104,7 @@ include::../DeveloperGuide.adoc[tag=editButton]
 ---TODO
 #Start of Extract [from: User Guide]#
 
-include::../UserGuide.adoc[tag=editButton]
+include::../UserGuide.adoc[tag=undoRedo]
 
 #End of Extract#
 
@@ -121,7 +121,7 @@ data type involved. This process is made much easier with the new edit button an
 ---TODO
 #Start of Extract [from: Developer Guide]#
 
-include::../DeveloperGuide.adoc[tag=editButton]
+include::../DeveloperGuide.adoc[tag=undoRedo]
 
 #End of Extract#
 
