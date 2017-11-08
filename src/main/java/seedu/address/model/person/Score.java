@@ -18,7 +18,7 @@ public class Score {
 
     public Score(String score) throws IllegalValueException {
         requireNonNull(score);
-        if (score.equals("")){
+        if (score.equals("")) {
             this.value = score;
         } else {
             String filteredScore = score.replaceAll("[^\\d]", "");
