@@ -1,5 +1,5 @@
 # siri99
-###### \seedu\address\commons\util\StringUtil.java
+###### \java\seedu\address\commons\util\StringUtil.java
 ``` java
     /**
      * Returns true if the {@code sentence} contains any part of the {@code word}.
@@ -33,11 +33,11 @@
         return false;
     }
 ```
-###### \seedu\address\logic\commands\EditCommand.java
+###### \java\seedu\address\logic\commands\EditCommand.java
 ``` java
         Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
 ```
-###### \seedu\address\logic\commands\EditCommand.java
+###### \java\seedu\address\logic\commands\EditCommand.java
 ``` java
         public void setBirthday(Birthday birthday) {
             if (!(birthday.toString().equals("No Birthday Listed"))) {
@@ -49,7 +49,7 @@
             return Optional.ofNullable(birthday);
         }
 ```
-###### \seedu\address\logic\commands\FavCommand.java
+###### \java\seedu\address\logic\commands\FavCommand.java
 ``` java
 package seedu.address.logic.commands;
 
@@ -108,7 +108,7 @@ public class FavCommand extends UndoableCommand {
     }
 }
 ```
-###### \seedu\address\logic\commands\FavouriteListCommand.java
+###### \java\seedu\address\logic\commands\FavouriteListCommand.java
 ``` java
 package seedu.address.logic.commands;
 
@@ -133,7 +133,7 @@ public class FavouriteListCommand extends UndoableCommand {
     }
 }
 ```
-###### \seedu\address\logic\commands\SortCommand.java
+###### \java\seedu\address\logic\commands\SortCommand.java
 ``` java
 package seedu.address.logic.commands;
 
@@ -159,7 +159,7 @@ public class SortCommand extends Command {
     public static final String MESSAGE_SUCCESS_BIRTHDAY = "Sorted successfully by Birthdays, listing all persons below";
 
 ```
-###### \seedu\address\logic\commands\UnfavCommand.java
+###### \java\seedu\address\logic\commands\UnfavCommand.java
 ``` java
 package seedu.address.logic.commands;
 
@@ -221,14 +221,14 @@ public class UnfavCommand extends UndoableCommand {
 
 }
 ```
-###### \seedu\address\logic\Logic.java
+###### \java\seedu\address\logic\Logic.java
 ``` java
     /** Returns an unmodifiable view of the filtered list of favourited persons */
     ObservableList<ReadOnlyPerson> getFilteredFavoritePersonList();
 
     String getCurrentList();
 ```
-###### \seedu\address\logic\LogicManager.java
+###### \java\seedu\address\logic\LogicManager.java
 ``` java
     @Override
     public ObservableList<ReadOnlyPerson> getFilteredFavoritePersonList() {
@@ -240,17 +240,17 @@ public class UnfavCommand extends UndoableCommand {
         return model.getCurrentList();
     }
 ```
-###### \seedu\address\logic\parser\AddCommandParser.java
+###### \java\seedu\address\logic\parser\AddCommandParser.java
 ``` java
             Birthday birthday = ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY)).get();
 ```
-###### \seedu\address\logic\parser\AddressBookParser.java
+###### \java\seedu\address\logic\parser\AddressBookParser.java
 ``` java
         case SortCommand.COMMAND_WORD:
         case SortCommand.COMMAND_WORD_ALIAS:
             return new SortCommandParser().parse(arguments);
 ```
-###### \seedu\address\logic\parser\AddressBookParser.java
+###### \java\seedu\address\logic\parser\AddressBookParser.java
 ``` java
         case FavCommand.COMMAND_WORD:
         case FavCommand.COMMAND_WORD_ALIAS:
@@ -260,18 +260,18 @@ public class UnfavCommand extends UndoableCommand {
         case UnfavCommand.COMMAND_WORD_ALIAS:
             return new UnfavCommandParser().parse(arguments);
 ```
-###### \seedu\address\logic\parser\AddressBookParser.java
+###### \java\seedu\address\logic\parser\AddressBookParser.java
 ``` java
         case FavouriteListCommand.COMMAND_WORD:
         case FavouriteListCommand.COMMAND_WORD_ALIAS:
             return new FavouriteListCommand();
 ```
-###### \seedu\address\logic\parser\EditCommandParser.java
+###### \java\seedu\address\logic\parser\EditCommandParser.java
 ``` java
             ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY)).ifPresent
                 (editPersonDescriptor::setBirthday);
 ```
-###### \seedu\address\logic\parser\FavCommandParser.java
+###### \java\seedu\address\logic\parser\FavCommandParser.java
 ``` java
 package seedu.address.logic.parser;
 
@@ -307,7 +307,7 @@ public class FavCommandParser implements Parser<FavCommand> {
     }
 }
 ```
-###### \seedu\address\logic\parser\ParserUtil.java
+###### \java\seedu\address\logic\parser\ParserUtil.java
 ``` java
     /**
      * Parses a {@code Optional<String> birthday} into an {@code Optional<Birthday>} if {@code birthday} is present.
@@ -320,7 +320,7 @@ public class FavCommandParser implements Parser<FavCommand> {
                 (new Birthday("No Birthday Listed"));
     }
 ```
-###### \seedu\address\logic\parser\SortCommandParser.java
+###### \java\seedu\address\logic\parser\SortCommandParser.java
 ``` java
 package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
@@ -359,7 +359,7 @@ public class SortCommandParser implements Parser<SortCommand> {
     }
 }
 ```
-###### \seedu\address\logic\parser\UnfavCommandParser.java
+###### \java\seedu\address\logic\parser\UnfavCommandParser.java
 ``` java
 package seedu.address.logic.parser;
 
@@ -395,13 +395,13 @@ public class UnfavCommandParser implements Parser<UnfavCommand> {
     }
 }
 ```
-###### \seedu\address\model\AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     public void setFavouritePersons(List<? extends ReadOnlyPerson> persons) throws DuplicatePersonException {
         this.favouritePersons.setPersons(persons);
     }
 ```
-###### \seedu\address\model\AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
         try {
             setFavouritePersons(newData.getFavouritePersonList());
@@ -409,7 +409,7 @@ public class UnfavCommandParser implements Parser<UnfavCommand> {
             assert false : "AddressBooks should not have duplicate persons";
         }
 ```
-###### \seedu\address\model\AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     /** Adds favourite person to addressBook
      * Also updates new tags found (if any)
@@ -420,7 +420,7 @@ public class UnfavCommandParser implements Parser<UnfavCommand> {
         favouritePersons.add(newPerson);
     }
 ```
-###### \seedu\address\model\AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     /**
      * Sorts the list of people in the address book.
@@ -433,7 +433,7 @@ public class UnfavCommandParser implements Parser<UnfavCommand> {
         persons.sortPersonsByBirthday();
     }
 ```
-###### \seedu\address\model\AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     /**
      * Removes {@code key} from this {@code AddressBook}.
@@ -447,30 +447,30 @@ public class UnfavCommandParser implements Parser<UnfavCommand> {
         }
     }
 ```
-###### \seedu\address\model\AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     @Override
     public ObservableList<ReadOnlyPerson> getFavouritePersonList() {
         return favouritePersons.asObservableList();
     }
 ```
-###### \seedu\address\model\Model.java
+###### \java\seedu\address\model\Model.java
 ``` java
     /** Deletes the given person from Favourite List. */
     void removeFavouritePerson(ReadOnlyPerson target) throws PersonNotFoundException;
 ```
-###### \seedu\address\model\Model.java
+###### \java\seedu\address\model\Model.java
 ``` java
     /** Adds the given person into Favourite List */
     void addFavouritePerson(ReadOnlyPerson person) throws DuplicatePersonException;
 ```
-###### \seedu\address\model\Model.java
+###### \java\seedu\address\model\Model.java
 ``` java
     String getCurrentList();
 
     void setCurrentList(String currentList);
 ```
-###### \seedu\address\model\Model.java
+###### \java\seedu\address\model\Model.java
 ``` java
     /** Returns an unmodifiable view of the filtered favourite person list */
     ObservableList<ReadOnlyPerson> getFilteredFavouritePersonList();
@@ -481,23 +481,23 @@ public class UnfavCommandParser implements Parser<UnfavCommand> {
     /** Sorts the list in ascending order of birthdays : Jan to Dec */
     void sortFilteredPersonListBirthday();
 ```
-###### \seedu\address\model\Model.java
+###### \java\seedu\address\model\Model.java
 ``` java
     void updateFilteredFavouritePersonList(Predicate<ReadOnlyPerson> predicate);
 
     void changeListTo(String listName);
 ```
-###### \seedu\address\model\ModelManager.java
+###### \java\seedu\address\model\ModelManager.java
 ``` java
     private final FilteredList<ReadOnlyPerson> filteredFavouritePersons;
 
     private String currentList;
 ```
-###### \seedu\address\model\ModelManager.java
+###### \java\seedu\address\model\ModelManager.java
 ``` java
         filteredFavouritePersons = new FilteredList<>(this.addressBook.getFavouritePersonList());
 ```
-###### \seedu\address\model\ModelManager.java
+###### \java\seedu\address\model\ModelManager.java
 ``` java
     @Override
     public synchronized void removeFavouritePerson(ReadOnlyPerson person) throws PersonNotFoundException {
@@ -506,7 +506,7 @@ public class UnfavCommandParser implements Parser<UnfavCommand> {
         indicateAddressBookChanged();
     }
 ```
-###### \seedu\address\model\ModelManager.java
+###### \java\seedu\address\model\ModelManager.java
 ``` java
     @Override
     public synchronized void addFavouritePerson(ReadOnlyPerson person) throws DuplicatePersonException {
@@ -515,7 +515,7 @@ public class UnfavCommandParser implements Parser<UnfavCommand> {
         indicateAddressBookChanged();
     }
 ```
-###### \seedu\address\model\ModelManager.java
+###### \java\seedu\address\model\ModelManager.java
 ``` java
     @Override
     public void changeListTo(String listName) {
@@ -532,7 +532,7 @@ public class UnfavCommandParser implements Parser<UnfavCommand> {
         this.currentList =  currentList;
     }
 ```
-###### \seedu\address\model\ModelManager.java
+###### \java\seedu\address\model\ModelManager.java
 ``` java
     @Override
     public ObservableList<ReadOnlyPerson> getFilteredFavouritePersonList() {
@@ -540,7 +540,7 @@ public class UnfavCommandParser implements Parser<UnfavCommand> {
         return FXCollections.unmodifiableObservableList(filteredFavouritePersons);
     }
 ```
-###### \seedu\address\model\ModelManager.java
+###### \java\seedu\address\model\ModelManager.java
 ``` java
     @Override
     public void updateFilteredFavouritePersonList(Predicate<ReadOnlyPerson> predicate) {
@@ -560,7 +560,7 @@ public class UnfavCommandParser implements Parser<UnfavCommand> {
         indicateAddressBookChanged();
     }
 ```
-###### \seedu\address\model\person\Birthday.java
+###### \java\seedu\address\model\person\Birthday.java
 ``` java
 package seedu.address.model.person;
 
@@ -632,7 +632,7 @@ public class Birthday {
     }
 }
 ```
-###### \seedu\address\model\person\NameContainsKeywordsPredicate.java
+###### \java\seedu\address\model\person\NameContainsKeywordsPredicate.java
 ``` java
         Set<String> s1 = new HashSet<String>(keywords);
         String[] tagList = person.getOnlyTags().split(" ");
@@ -643,11 +643,11 @@ public class Birthday {
                 || (!Collections.disjoint(s2, s1))) || (keywords.stream().anyMatch(keyword ->
                 StringUtil.containsSubstringOfWord(person.getName().fullName, keyword)));
 ```
-###### \seedu\address\model\person\Person.java
+###### \java\seedu\address\model\person\Person.java
 ``` java
         this.birthday = new SimpleObjectProperty<>(birthday);
 ```
-###### \seedu\address\model\person\Person.java
+###### \java\seedu\address\model\person\Person.java
 ``` java
     public void setBirthday(Birthday birthday)  {
         this.birthday.set(requireNonNull(birthday));
@@ -663,17 +663,17 @@ public class Birthday {
         return birthday.get();
     }
 ```
-###### \seedu\address\model\person\ReadOnlyPerson.java
+###### \java\seedu\address\model\person\ReadOnlyPerson.java
 ``` java
     ObjectProperty<Birthday> birthdayProperty();
     Birthday getBirthday();
 ```
-###### \seedu\address\model\person\ReadOnlyPerson.java
+###### \java\seedu\address\model\person\ReadOnlyPerson.java
 ``` java
                 .append(" Birthday: ")
                 .append(getBirthday())
 ```
-###### \seedu\address\model\person\UniquePersonList.java
+###### \java\seedu\address\model\person\UniquePersonList.java
 ``` java
     /**
      *Sorts the list alphabetically by name
@@ -743,21 +743,21 @@ public class Birthday {
     }
 
 ```
-###### \seedu\address\storage\XmlAdaptedPerson.java
+###### \java\seedu\address\storage\XmlAdaptedPerson.java
 ``` java
     private String birthday;
     @XmlElement(required = true)
 ```
-###### \seedu\address\storage\XmlAdaptedPerson.java
+###### \java\seedu\address\storage\XmlAdaptedPerson.java
 ``` java
         birthday = source.getBirthday().value;
 ```
-###### \seedu\address\storage\XmlSerializableAddressBook.java
+###### \java\seedu\address\storage\XmlSerializableAddressBook.java
 ``` java
         favouritePersons.addAll(src.getFavouritePersonList().stream().map(XmlAdaptedPerson::new)
                 .collect(Collectors.toList()));
 ```
-###### \seedu\address\storage\XmlSerializableAddressBook.java
+###### \java\seedu\address\storage\XmlSerializableAddressBook.java
 ``` java
     @Override
     public ObservableList<ReadOnlyPerson> getFavouritePersonList() {
@@ -773,7 +773,7 @@ public class Birthday {
         return FXCollections.unmodifiableObservableList(favouritePersons);
     }
 ```
-###### \seedu\address\ui\ChangeInternalListEvent.java
+###### \java\seedu\address\ui\ChangeInternalListEvent.java
 ``` java
 package seedu.address.ui;
 
@@ -801,13 +801,13 @@ public class ChangeInternalListEvent extends BaseEvent {
     }
 }
 ```
-###### \seedu\address\ui\CommandBox.java
+###### \java\seedu\address\ui\CommandBox.java
 ``` java
         CommandResult commandResult = new CommandResult("");
         if (logic.getCurrentList().contains("favlist")) {
             commandResult = new CommandResult("Add command does not work in favourite list");;
 ```
-###### \seedu\address\ui\CommandBox.java
+###### \java\seedu\address\ui\CommandBox.java
 ``` java
     /**
      * handles button events given to it by the fxml document for which it is set as controller by
@@ -828,7 +828,7 @@ public class ChangeInternalListEvent extends BaseEvent {
         }
     }
 ```
-###### \seedu\address\ui\MainWindow.java
+###### \java\seedu\address\ui\MainWindow.java
 ``` java
     /**
      * Changes displayed list accordingly
@@ -846,16 +846,16 @@ public class ChangeInternalListEvent extends BaseEvent {
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 ```
-###### \seedu\address\ui\PersonCard.java
+###### \java\seedu\address\ui\PersonCard.java
 ``` java
     @FXML
     private Label birthday;
 ```
-###### \seedu\address\ui\PersonCard.java
+###### \java\seedu\address\ui\PersonCard.java
 ``` java
         birthday.textProperty().bind(Bindings.convert(person.birthdayProperty()));
 ```
-###### \seedu\address\ui\PersonCard.java
+###### \java\seedu\address\ui\PersonCard.java
 ``` java
             if (logic.getCurrentList().contains("favlist")) {
                 commandResult = new CommandResult("Delete command does not work in favourite list");;
@@ -863,17 +863,39 @@ public class ChangeInternalListEvent extends BaseEvent {
                 commandResult = logic.execute(delCommand);
             }
 ```
-###### \seedu\address\ui\PersonCard.java
+###### \java\seedu\address\ui\PersonCard.java
 ``` java
         CommandResult commandResult = new CommandResult("");
         if (logic.getCurrentList().contains("favlist")) {
             commandResult = new CommandResult("Edit command does not work in favourite list");;
 ```
-###### \seedu\address\ui\UiManager.java
+###### \java\seedu\address\ui\UiManager.java
 ``` java
     @Subscribe
     private void handleChangeInternalListEvent(ChangeInternalListEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.fillInnerPartsWithIndicatedList(event.getListName());
     }
+```
+###### \resources\view\CommandBox.fxml
+``` fxml
+  <Region prefHeight="10.0" prefWidth="1.0" HBox.hgrow="ALWAYS" />
+  <Button onAction='#handleFavlistButtonAction' id="favlist" prefWidth="45.0" minWidth="45.0" prefHeight="31.0" minHeight="31.0">
+    <graphic>
+      <ImageView fitHeight="20.0" fitWidth="20.0">
+        <image>
+          <Image url="/images/favouritelist_icon.png" />
+        </image>
+      </ImageView>
+    </graphic>
+  </Button>
+```
+###### \resources\view\PersonListCard.fxml
+``` fxml
+      <Label fx:id="birthday" styleClass="cell_small_label" text="\$birthday" />
+```
+###### \resources\view\PersonListCard.fxml
+``` fxml
+      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
 ```

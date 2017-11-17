@@ -1,21 +1,21 @@
 # coolpotato1
-###### \seedu\address\logic\commands\SortCommand.java
+###### \java\seedu\address\logic\commands\SortCommand.java
 ``` java
     public static final String MESSAGE_SUCCESS_SCORE = "Sorted successfully by Group Scores, listing all persons below";
 ```
-###### \seedu\address\logic\parser\ParserUtil.java
+###### \java\seedu\address\logic\parser\ParserUtil.java
 ``` java
     public static Optional<Score> parseScore(Optional<String> score) throws IllegalValueException {
         requireNonNull(score);
         return score.isPresent() ? Optional.of(new Score(score.get())) : Optional.of(new Score(""));
     }
 ```
-###### \seedu\address\model\Model.java
+###### \java\seedu\address\model\Model.java
 ``` java
     /** Sorts the list by groups score, in descending order*/
     void sortFilteredPersonListScore();
 ```
-###### \seedu\address\model\ModelManager.java
+###### \java\seedu\address\model\ModelManager.java
 ``` java
     @Override
     public void sortFilteredPersonListScore() {
@@ -23,7 +23,7 @@
         indicateAddressBookChanged();
     }
 ```
-###### \seedu\address\model\person\Person.java
+###### \java\seedu\address\model\person\Person.java
 ``` java
     public void setScore(Score score) {
         this.score.set(requireNonNull(score));
@@ -39,17 +39,17 @@
         return score.get();
     }
 ```
-###### \seedu\address\model\person\ReadOnlyPerson.java
+###### \java\seedu\address\model\person\ReadOnlyPerson.java
 ``` java
     ObjectProperty<Score> scoreProperty();
     Score getScore();
 ```
-###### \seedu\address\model\person\ReadOnlyPerson.java
+###### \java\seedu\address\model\person\ReadOnlyPerson.java
 ``` java
                 .append(" ")
                 .append(getScore())
 ```
-###### \seedu\address\model\person\Score.java
+###### \java\seedu\address\model\person\Score.java
 ``` java
 import static java.util.Objects.requireNonNull;
 
@@ -104,4 +104,8 @@ public class Score {
         return value.hashCode();
     }
 }
+```
+###### \resources\view\PersonListCard.fxml
+``` fxml
+      <Label fx:id="score" styleClass="cell_small_label"  text="\$score" />
 ```
