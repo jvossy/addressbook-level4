@@ -89,7 +89,7 @@ public class AddCommandParserTest {
                 new AddCommand(expectedPerson));
         //@@author
 
-        //@@author Henning
+        //@@author coolpotato1
         //multiple scores - last score accepted
         assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + BIRTHDAY_DESC_BOB
               + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCORE_DESC_AMY + SCORE_DESC_BOB + TAG_DESC_FRIEND,
@@ -115,7 +115,7 @@ public class AddCommandParserTest {
                 + BIRTHDAY_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + SCORE_DESC_AMY,
                 new AddCommand(expectedPerson));
 
-        //@@author Henning
+        //@@author coolpotato1
         //no score
         Person expectedPerson2 = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withBirthday(VALID_BIRTHDAY_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
@@ -131,7 +131,7 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, new AddCommand(expectedPerson3));
 
-        //@@author Henning
+        //@@author
 
         //@@author siri99
         // birthday field missing
@@ -198,13 +198,13 @@ public class AddCommandParserTest {
                 + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC + SCORE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
-        //@@author Henning
+        //@@author coolpotato1
         // invalid score
         assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + BIRTHDAY_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INVALID_SCORE_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Score.MESSAGE_SCORE_CONSTRAINTS);
 
-        //@@author Henning
+        //@@author
         // invalid tag
         assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + BIRTHDAY_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCORE_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND,

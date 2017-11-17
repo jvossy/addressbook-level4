@@ -172,13 +172,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author
 
-    //@@author Henning
+    //@@author coolpotato1
     @Override
     public void sortFilteredPersonListScore() {
         addressBook.sortPersonsByScore();
         indicateAddressBookChanged();
     }
-    //@@author Henning
+    //@@author
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object

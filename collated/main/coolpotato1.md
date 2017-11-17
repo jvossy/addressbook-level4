@@ -1,56 +1,7 @@
-# Henning
+# coolpotato1
 ###### \java\seedu\address\logic\commands\SortCommand.java
 ``` java
     public static final String MESSAGE_SUCCESS_SCORE = "Sorted successfully by Group Scores, listing all persons below";
-```
-###### \java\seedu\address\logic\commands\SortCommand.java
-``` java
-    private String sortFilter;
-
-    public SortCommand (String sortFilter) {
-        //Null sort Filter refers to default sort command i.e. sort by name
-        this.sortFilter = sortFilter;
-    }
-
-    @Override
-    public CommandResult execute() throws CommandException {
-        switch (sortFilter) {
-        case "name":
-        default:
-            model.sortFilteredPersonListName();
-            return new CommandResult(MESSAGE_SUCCESS_NAME);
-
-        case "birthday":
-        case "b":
-            model.sortFilteredPersonListBirthday();
-            return new CommandResult(MESSAGE_SUCCESS_BIRTHDAY);
-
-        //author Henning
-        case "score":
-        case "s":
-            model.sortFilteredPersonListScore();
-            return new CommandResult(MESSAGE_SUCCESS_SCORE);
-            //author
-        }
-
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // if not the same object, return false
-        if (!(other instanceof SortCommand)) {
-            return false;
-        }
-
-        SortCommand s = (SortCommand) other;
-        return sortFilter.equals(s.sortFilter);
-    }
-}
 ```
 ###### \java\seedu\address\logic\parser\ParserUtil.java
 ``` java
@@ -59,24 +10,10 @@
         return score.isPresent() ? Optional.of(new Score(score.get())) : Optional.of(new Score(""));
     }
 ```
-###### \java\seedu\address\logic\parser\ParserUtil.java
-``` java
-
-```
 ###### \java\seedu\address\model\Model.java
 ``` java
     /** Sorts the list by groups score, in descending order*/
     void sortFilteredPersonListScore();
-```
-###### \java\seedu\address\model\Model.java
-``` java
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate);
-
 ```
 ###### \java\seedu\address\model\ModelManager.java
 ``` java
@@ -85,28 +22,6 @@
         addressBook.sortPersonsByScore();
         indicateAddressBookChanged();
     }
-```
-###### \java\seedu\address\model\ModelManager.java
-``` java
-    @Override
-    public boolean equals(Object obj) {
-        // short circuit if same object
-        if (obj == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(obj instanceof ModelManager)) {
-            return false;
-        }
-
-        // state check
-        ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
-                && filteredPersons.equals(other.filteredPersons);
-    }
-
-}
 ```
 ###### \java\seedu\address\model\person\Person.java
 ``` java
@@ -123,17 +38,11 @@
     public Score getScore() {
         return score.get();
     }
-
-    @Override
-    public Avatar getAvatarPic() {
-        return avatarPic.get();
-    }
-
-    public void setAvatarPic(Avatar avatar) {
-        this.avatarPic.set(requireNonNull(avatar));
-    }
-
-
+```
+###### \java\seedu\address\model\person\ReadOnlyPerson.java
+``` java
+    ObjectProperty<Score> scoreProperty();
+    Score getScore();
 ```
 ###### \java\seedu\address\model\person\ReadOnlyPerson.java
 ``` java

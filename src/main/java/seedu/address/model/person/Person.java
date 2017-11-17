@@ -135,7 +135,7 @@ public class Person implements ReadOnlyPerson {
     public Address getAddress() {
         return address.get();
     }
-    //@@author Henning
+    //@@author coolpotato1
     public void setScore(Score score) {
         this.score.set(requireNonNull(score));
     }
@@ -149,6 +149,7 @@ public class Person implements ReadOnlyPerson {
     public Score getScore() {
         return score.get();
     }
+    //@@author
 
     @Override
     public Avatar getAvatarPic() {
@@ -160,7 +161,7 @@ public class Person implements ReadOnlyPerson {
     }
 
 
-    //@@author
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
